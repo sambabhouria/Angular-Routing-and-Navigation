@@ -5,6 +5,7 @@ import { EmployeeService } from '../employee.service';
   selector: 'app-employee-list',
   template: `
     <h2>Lit of employees</h2>
+    <h3>{{errorMsg}}</h3>
     <ul *ngFor= " let employee of employees">
      <li>{{employee.name}}</li>
     </ul>
@@ -23,6 +24,7 @@ export class EmployeeListComponent implements OnInit {
   // ]
 
   public employees = [ ];
+  public errorMsg;
   constructor(private _employeeService: EmployeeService) { }
 
   ngOnInit(): void {
@@ -30,7 +32,9 @@ export class EmployeeListComponent implements OnInit {
     // this method return an observable to use it we need to subscribe to it
     // the data arrive assynchronous and the data is assyned to the employee variables
     this._employeeService.getEmployees()
-    .subscribe(data => this.employees= data);
+    .subscribe(data => this.employees= data,
+      error => this.errorMsg = error
+    );
 
   }
 }

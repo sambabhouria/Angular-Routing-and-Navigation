@@ -1,6 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { throwError, concat, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
 import { IEmployee } from './employee';
 
 /*
@@ -26,7 +29,18 @@ export class EmployeeService {
   // The service must be register if not it will be a regular class
   private _url: string = "/assets/data/employees.json";
   getEmployees (): Observable<IEmployee[]> {
-    return this.http.get<IEmployee[]>(this._url);
+    // return this.http.get<IEmployee[]>(this._url);
+
+    return this.http.get<IEmployee[]>(this._url)
+    .pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+
+        //Handle the error here
+        return throwError(err || "Server Error");    //Rethrow it back to component thats subscribe to the observable
+      })
+    )
     // return [
     //   {id: 1, name:"George", age:32, retiredate:"March 12, 2014"},
     //   {id: 2, name:"Edward", age:17, retiredate:"June 2, 2023"},
