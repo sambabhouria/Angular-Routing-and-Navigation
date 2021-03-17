@@ -26,6 +26,11 @@ export class EmployeeListComponent implements OnInit {
   constructor(private _employeeService: EmployeeService) { }
 
   ngOnInit(): void {
-    this.employees = this._employeeService.getEmployees();
+    // this.employees = this._employeeService.getEmployees();
+    // this method return an observable to use it we need to subscribe to it
+    // the data arrive assynchronous and the data is assyned to the employee variables
+    this._employeeService.getEmployees()
+    .subscribe(data => this.employees= data);
+
   }
 }
