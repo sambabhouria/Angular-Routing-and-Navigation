@@ -27,7 +27,7 @@ export class EmployeeService {
 
   // Creting a service that return a method getEmployees array
   // The service must be register if not it will be a regular class
-  private _url: string = "/assets/data/employees.jsond";
+  private _url: string = "/assets/data/employees.json";
   getEmployees (): Observable<IEmployee[]> {
     // return this.http.get<IEmployee[]>(this._url);
 
