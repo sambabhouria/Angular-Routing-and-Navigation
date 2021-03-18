@@ -5,7 +5,7 @@ import { EmployeeService } from '../employee.service';
   selector: 'app-employee-detail',
   template: `
     <h2>Employee details</h2>
-    <h3>{{errorMsg}}</h3>
+    <h3>{{errorMsg }}</h3>
     <ul *ngFor= " let employee of employees">
      <li>{{employee.id}} - {{employee.name}} - {{employee.age}} - {{employee.retiredate}}</li>
     </ul>
@@ -38,7 +38,7 @@ export class EmployeeDetailComponent implements OnInit {
     // the data arrive assynchronous and the data is assyned to the employee variables
     this._employeeService.getEmployees()
     .subscribe(data => this.employees= data,
-      error => this.errorMsg = error
+      error => this.errorMsg = error.message
     );
 
   }
