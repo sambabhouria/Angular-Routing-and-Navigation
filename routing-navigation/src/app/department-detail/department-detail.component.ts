@@ -7,6 +7,12 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
     <h3>You selected department with id = {{departmentId}}</h3>
 
     <p>
+      <button (click)="showOverview()">Overview</button>
+      <button (click)="showContact()">Contact</button>
+    </p>
+    <router-outlet></router-outlet>
+
+    <p>
       <button (click)="goPrevious()">Previous</button>&nbsp;
       <button (click)="goNext()">Next</button>
     </p>
@@ -56,4 +62,11 @@ export class DepartmentDetailComponent implements OnInit {
     this.router.navigate(['../', { id: selectedId }], { relativeTo: this.route });
   }
 
+  showOverview(){
+    this.router.navigate(['overview'], { relativeTo: this.route });
+  }
+
+  showContact(){
+    this.router.navigate(['contact'], { relativeTo: this.route });
+  }
 }
